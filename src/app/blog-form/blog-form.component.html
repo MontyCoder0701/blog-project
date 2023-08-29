@@ -1,0 +1,17 @@
+<form class="blog-form" [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+  <input
+    class="blog-form-title"
+    formControlName="title"
+    placeholder="제목을 입력하세요"
+    required
+  />
+  <textarea
+    class="blog-form-text"
+    formControlName="text"
+    placeholder="당신의 이야기를 적어보세요 ..."
+    required
+  >
+  </textarea>
+
+  <button class="submit-btn" type="submit">출간하기</button>
+</form>

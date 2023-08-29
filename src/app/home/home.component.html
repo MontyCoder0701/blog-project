@@ -1,0 +1,15 @@
+<div class="top-row">
+  <div>velog</div>
+  <a routerLink="/create">
+    <button class="main-btn">새 글 작성</button>
+  </a>
+</div>
+<div class="grid-container">
+  <div *ngFor="let post of blogPosts" class="grid-item">
+    <a [routerLink]="['/blog', post.id]">
+      <h3>{{ post.title | slice : 0 : 10 }}</h3>
+      <p>{{ post.text | slice : 0 : 30 }} ...</p>
+      <p>{{ post.date }}</p>
+    </a>
+  </div>
+</div>

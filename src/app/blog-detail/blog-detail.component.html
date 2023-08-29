@@ -1,0 +1,10 @@
+<div class="detail">
+  <a routerLink="/"> velog </a>
+  <div class="detail-post" *ngIf="post">
+    <button (click)="DeletePost()">삭제하기</button>
+    <!-- <a [routerLink]="['/edit', post.id]">수정하기</a> -->
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.date }}</p>
+    <p>{{ post.text }}</p>
+  </div>
+</div>

@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #f8f9fa;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+input {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.blog-form {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 10vh;
+  margin: 5vh;
+}
+
+.blog-form-title {
+  height: 10vh;
+  font-size: 5vh;
+}
+
+.blog-form-text {
+  height: 50vh;
+  width: 100vh;
+  overflow: auto;
+  border: none;
+  outline: none;
+}
+
+.detail {
+  padding: 3% 10%;
+}
+
+.detail-post {
+  padding-top: 10vh;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  width: 10vh;
+  align-item: right;
+  background-color: #12b886;
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2em;
+  padding: 0em 5em;
+  justify-items: center;
+}
+
+.grid-item {
+  width: 30vh;
+  height: 30vh;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+  padding: 5%;
+}
+
+.grid-item:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 5%;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3% 10%;
+}
+
+.main-btn {
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  outline: none;
+  font-weight: bold;
+  word-break: keep-all;
+  border: 1px solid black;
+  color: black;
+  transition: all 0.125s ease-in 0s;
+  cursor: pointer;
+}
+
+.main-btn:hover {
+  background-color: black;
+  color: white;
+}
