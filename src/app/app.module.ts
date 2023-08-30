@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ClarityModule } from '@clr/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { BlogFormComponent } from './blog-form/blog-form.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
+import { HomeComponent } from './home/home.component';
+import { BlogCreateComponent } from './blog-create/blog-create.component';
+
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    BlogFormComponent,
     BlogDetailComponent,
     BlogEditComponent,
+    BlogCreateComponent,
   ],
   imports: [
     BrowserModule,

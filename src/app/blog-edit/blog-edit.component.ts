@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { BlogService } from '../service/blog.service';
 import { BlogPost } from '../interface/blog-post.interface';
 
@@ -9,35 +10,47 @@ import { BlogPost } from '../interface/blog-post.interface';
   templateUrl: './blog-edit.component.html',
   styleUrls: ['./blog-edit.component.css'],
 })
-export class BlogEditComponent {
-  blogForm: FormGroup;
-  postId: string = '';
-  post?: BlogPost;
+export class BlogEditComponent implements OnInit {
+  private _postId: string = '';
+  private _post?: BlogPost;
 
   constructor(
-    private formBuilder: FormBuilder,
     private blogService: BlogService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {
-    this.blogForm = this.formBuilder.group({
-      title: '',
-      text: '',
-    });
+    private route: ActivatedRoute,
+  ) {}
+
+  private _blogForm: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    text: new FormControl(''),
+  });
+
+  get blogForm() {
+    return this._blogForm;
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.postId = params['id'];
-      this.post = this.blogService.getBlogPostById(this.postId);
+      this._postId = params['id'];
+      this._post = this.blogService.getBlogPostById(this._postId);
+
+      if (this._post) {
+        this._blogForm.setValue({
+          title: this._post.title,
+          text: this._post.text,
+        });
+      }
     });
   }
 
-  onSubmit() {
-    const newPost = this.blogForm.value;
-    newPost.date = new Date().toLocaleDateString();
-    this.blogService.addBlogPost(newPost);
-    this.blogForm.reset();
+  handleUpdateSubmit() {
+    this.blogService.updateBlogPost(
+      this._postId,
+      this._blogForm.value.title,
+      this._blogForm.value.text,
+      new Date(),
+    );
+    this._blogForm.reset();
     this.router.navigate(['/']);
   }
 }

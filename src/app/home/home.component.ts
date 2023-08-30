@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { BlogService } from '../service/blog.service';
 import { BlogPost } from '../interface/blog-post.interface';
 
@@ -8,11 +9,15 @@ import { BlogPost } from '../interface/blog-post.interface';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  blogPosts: BlogPost[] = [];
-
   constructor(private blogService: BlogService) {}
 
+  private _blogPosts: BlogPost[] = [];
+
+  get blogPosts() {
+    return this._blogPosts;
+  }
+
   ngOnInit() {
-    this.blogPosts = this.blogService.getBlogPosts();
+    this._blogPosts = this.blogService.blogPosts;
   }
 }

@@ -1,5 +1,5 @@
 <div class="top-row">
-  <div>velog</div>
+  <h2>velog</h2>
   <a routerLink="/create">
     <button class="main-btn">새 글 작성</button>
   </a>
@@ -7,9 +7,9 @@
 <div class="grid-container">
   <div *ngFor="let post of blogPosts" class="grid-item">
     <a [routerLink]="['/blog', post.id]">
-      <h3>{{ post.title | slice : 0 : 10 }}</h3>
-      <p>{{ post.text | slice : 0 : 30 }} ...</p>
-      <p>{{ post.date }}</p>
+      <h3>{{ post.title | slice: 0 : 10 }}</h3>
+      <p>{{ post.text | slice: 0 : 30 }} ...</p>
+      <p>{{ post.date | date: "short" }}</p>
     </a>
   </div>
 </div>

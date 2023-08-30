@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { BlogService } from '../service/blog.service';
 import { BlogPost } from '../interface/blog-post.interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-detail',
@@ -10,28 +10,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./blog-detail.component.css'],
 })
 export class BlogDetailComponent implements OnInit {
-  postId: string = '';
-  // post: BlogPost = {} as BlogPost;
-  post?: BlogPost;
+  private _postId: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private router: Router
+    private router: Router,
   ) {}
+
+  private _post?: BlogPost;
+
+  get post() {
+    return this._post;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.postId = params['id'];
-      this.post = this.blogService.getBlogPostById(this.postId);
+      this._postId = params['id'];
+      this._post = this.blogService.getBlogPostById(this._postId);
     });
   }
 
-  DeletePost() {
-    this.route.params.subscribe((params) => {
-      this.postId = params['id'];
-      this.blogService.deleteBlogPostById(this.postId);
-      this.router.navigate(['/']);
-    });
+  handleDeletePost(post: BlogPost) {
+    this.blogService.deleteBlogPost(post);
+    this.router.navigate(['/']);
   }
 }

@@ -1,4 +1,9 @@
-<form class="blog-form" [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+<form
+  class="blog-form"
+  clrForm
+  [formGroup]="blogForm"
+  (ngSubmit)="handleAddSubmit()"
+>
   <input
     class="blog-form-title"
     formControlName="title"
@@ -12,6 +17,5 @@
     required
   >
   </textarea>
-
   <button class="submit-btn" type="submit">출간하기</button>
 </form>

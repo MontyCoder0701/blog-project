@@ -1,31 +1,38 @@
 import { Injectable } from '@angular/core';
+
 import { BlogPost } from '../interface/blog-post.interface';
-import * as uuid from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  private blogPosts: BlogPost[] = [];
+  private _blogPosts: BlogPost[] = [];
 
-  getBlogPosts() {
-    return this.blogPosts;
+  get blogPosts(): BlogPost[] {
+    return this._blogPosts;
   }
 
-  getBlogPostById(id: string) {
-    return this.blogPosts.find((post) => post.id === id);
+  getBlogPostById(id: string): BlogPost | undefined {
+    return this._blogPosts.find((post) => post.id === id);
   }
 
-  addBlogPost(post: BlogPost) {
-    const randomId = uuid.v4();
-    post.id = randomId;
-    this.blogPosts.push(post);
+  addBlogPost(id: string, title: string, text: string, date: Date): void {
+    const newPost = new BlogPost(id, title, text, date);
+    this._blogPosts.push(newPost);
   }
 
-  deleteBlogPostById(id: string) {
-    const blogPost = this.getBlogPostById(id);
-    this.blogPosts = this.blogPosts.filter((item) => item !== blogPost);
+  deleteBlogPost(post: BlogPost): void {
+    this._blogPosts = this._blogPosts.filter((item) => item !== post);
   }
 
-  editBlogPostById(id: string, post: BlogPost) {}
+  updateBlogPost(id: string, title: string, text: string, date: Date): void {
+    const updatedPost = new BlogPost(id, title, text, date);
+    const index = this._blogPosts.findIndex(
+      (post) => post.id === updatedPost.id,
+    );
+
+    if (index !== -1) {
+      this._blogPosts[index] = updatedPost;
+    }
+  }
 }
