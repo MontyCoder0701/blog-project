@@ -7,9 +7,16 @@
 <div class="grid-container">
   <div *ngFor="let post of blogPosts" class="grid-item">
     <a [routerLink]="['/blog', post.id]">
+      <p>{{ post.isDraft ? "초안" : "최종안" }}</p>
+      <div *ngIf="post.isDraft">
+        <span class="badge badge-success">
+          <span class="clr-sr-only"></span>
+        </span>
+      </div>
       <h3>{{ post.title | slice: 0 : 10 }}</h3>
       <p>{{ post.text | slice: 0 : 30 }} ...</p>
-      <p>{{ post.date | date: "short" }}</p>
+      <p>생성일 {{ post.createDate | date: "short" }}</p>
+      <p>출판일 {{ post.editDate | date: "short" }}</p>
     </a>
   </div>
 </div>

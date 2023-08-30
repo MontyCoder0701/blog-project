@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 
 import { BlogService } from '../service/blog.service';
 
-import * as uuid from 'uuid';
-
 @Component({
   selector: 'app-blog-create',
   templateUrl: './blog-create.component.html',
@@ -28,12 +26,13 @@ export class BlogCreateComponent {
 
   handleAddSubmit() {
     this.blogService.addBlogPost(
-      uuid.v4(),
       this._blogForm.value.title,
       this._blogForm.value.text,
-      new Date(),
     );
     this._blogForm.reset();
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(
+      (nav) => {},
+      (err) => {},
+    );
   }
 }

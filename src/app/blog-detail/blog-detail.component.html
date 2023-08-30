@@ -9,8 +9,20 @@
         <button class="btn" (click)="handleDeletePost(post)">삭제</button>
         <button class="btn" [routerLink]="['/edit', post.id]">수정</button>
       </div>
+      <div class="clr-toggle-wrapper">
+        <input
+          class="clr-toggle"
+          id="toggle1"
+          name="toggle-basic"
+          type="checkbox"
+          value="option1"
+          (click)="handleToggleOn()"
+        />
+        <label for="toggle1">{{ post.isDraft ? "초안" : "최종안" }}</label>
+      </div>
     </div>
-    <p>{{ post.date | date: "short" }}</p>
+    <p>생성일 {{ post.createDate | date: "short" }}</p>
+    <p>출판일 {{ post.editDate | date: "short" }}</p>
     <p>{{ post.text }}</p>
   </div>
 </div>

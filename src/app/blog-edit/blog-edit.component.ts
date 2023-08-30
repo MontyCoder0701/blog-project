@@ -44,13 +44,11 @@ export class BlogEditComponent implements OnInit {
   }
 
   handleUpdateSubmit() {
-    this.blogService.updateBlogPost(
-      this._postId,
-      this._blogForm.value.title,
-      this._blogForm.value.text,
-      new Date(),
-    );
+    this.blogService.updateBlogPost(this._postId, this._blogForm.value);
     this._blogForm.reset();
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(
+      (nav) => {},
+      (err) => {},
+    );
   }
 }

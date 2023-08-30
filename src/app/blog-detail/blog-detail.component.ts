@@ -11,6 +11,7 @@ import { BlogPost } from '../interface/blog-post.interface';
 })
 export class BlogDetailComponent implements OnInit {
   private _postId: string = '';
+  private _isDraft: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,11 +29,22 @@ export class BlogDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this._postId = params['id'];
       this._post = this.blogService.getBlogPostById(this._postId);
+      if (this._post) {
+        this._isDraft = this._post.isDraft;
+      }
     });
+  }
+
+  handleToggleOn() {
+    this._isDraft = !this._isDraft;
+    this.blogService.updateBlogPostDraft(this._postId, this._isDraft);
   }
 
   handleDeletePost(post: BlogPost) {
     this.blogService.deleteBlogPost(post);
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(
+      (nav) => {},
+      (err) => {},
+    );
   }
 }

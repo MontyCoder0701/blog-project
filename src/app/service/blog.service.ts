@@ -16,8 +16,8 @@ export class BlogService {
     return this._blogPosts.find((post) => post.id === id);
   }
 
-  addBlogPost(id: string, title: string, text: string, date: Date): void {
-    const newPost = new BlogPost(id, title, text, date);
+  addBlogPost(title: string, text: string): void {
+    const newPost = new BlogPost(title, text);
     this._blogPosts.push(newPost);
   }
 
@@ -25,14 +25,15 @@ export class BlogService {
     this._blogPosts = this._blogPosts.filter((item) => item !== post);
   }
 
-  updateBlogPost(id: string, title: string, text: string, date: Date): void {
-    const updatedPost = new BlogPost(id, title, text, date);
-    const index = this._blogPosts.findIndex(
-      (post) => post.id === updatedPost.id,
-    );
+  updateBlogPost(id: string, value: { title: string; text: string }): void {
+    const foundPost = this._blogPosts.find((post) => post.id === id);
+    foundPost?.setTitle(value.title);
+    foundPost?.setText(value.text);
+    foundPost?.setEditDate(new Date());
+  }
 
-    if (index !== -1) {
-      this._blogPosts[index] = updatedPost;
-    }
+  updateBlogPostDraft(id: string, isDraft: boolean): void {
+    const foundPost = this._blogPosts.find((post) => post.id === id);
+    foundPost?.setDraft(isDraft);
   }
 }
