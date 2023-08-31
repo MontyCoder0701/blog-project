@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BlogService } from '../service/blog.service';
-import { BlogPost } from '../interface/blog-post.interface';
+import { BlogService } from '../../service/blog.service';
+import { BlogPost } from '../../interface/blog-post.interface';
 
 @Component({
   selector: 'app-blog-detail',
@@ -43,8 +43,14 @@ export class BlogDetailComponent implements OnInit {
   handleDeletePost(post: BlogPost) {
     this.blogService.deleteBlogPost(post);
     this.router.navigate(['/']).then(
-      (nav) => {},
-      (err) => {},
+      (nav) => {
+        if (!nav) {
+          throw Error('Navigation failed');
+        }
+      },
+      (err) => {
+        throw Error(err);
+      },
     );
   }
 }

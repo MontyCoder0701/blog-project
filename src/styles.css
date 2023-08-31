@@ -73,8 +73,8 @@ input {
 }
 
 .grid-item {
-  width: 30vh;
-  height: 30vh;
+  width: 35vh;
+  height: 35vh;
   box-shadow: rgba(0, 0, 0, 0.1) 0 5px 15px;
   padding: 5%;
 }

@@ -1,0 +1,12 @@
+{
+  "creationDate" : "Created",
+  "delete" : "Delete",
+  "draft": "Draft",
+  "edit" : "Edit",
+  "final" : "Final",
+  "enterTitle" : "Enter Your Title",
+  "enterText" : "Enter your story ...",
+  "publish" : "Publish",
+  "publishDate" : "Published",
+  "writeNewText" : "Write New Text"
+}

@@ -1,0 +1,12 @@
+{
+  "creationDate": "생성일",
+  "delete": "삭제",
+  "draft" : "초안",
+  "edit": "수정",
+  "final" : "최종본",
+  "enterTitle" : "제목을 입력하세요",
+  "enterText" : "본문을 입력해주세요 ...",
+  "publish" : "출간하기",
+  "publishDate": "출간일",
+  "writeNewText": "새 글 작성"
+}

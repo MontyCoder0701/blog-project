@@ -1,8 +1,7 @@
 <form
   class="blog-form"
-  clrForm
   [formGroup]="blogForm"
-  (ngSubmit)="handleAddSubmit()"
+  (ngSubmit)="handleUpdateSubmit()"
 >
   <input
     class="blog-form-title"
@@ -17,5 +16,5 @@
     required
   >
   </textarea>
-  <button class="submit-btn" type="submit">출간하기</button>
+  <button class="submit-btn" type="submit">{{ "edit" | translate }}</button>
 </form>

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BlogService } from '../service/blog.service';
-import { BlogPost } from '../interface/blog-post.interface';
+import { BlogService } from '../../service/blog.service';
+import { BlogPost } from '../../interface/blog-post.interface';
 
 @Component({
   selector: 'app-blog-edit',
@@ -47,8 +47,14 @@ export class BlogEditComponent implements OnInit {
     this.blogService.updateBlogPost(this._postId, this._blogForm.value);
     this._blogForm.reset();
     this.router.navigate(['/']).then(
-      (nav) => {},
-      (err) => {},
+      (nav) => {
+        if (!nav) {
+          throw Error('Navigation failed');
+        }
+      },
+      (err) => {
+        throw Error(err);
+      },
     );
   }
 }

@@ -6,8 +6,12 @@
     <div class="detail-post-title">
       <h2>{{ post.title }}</h2>
       <div class="btn-group btn-outline-primary btn-sm">
-        <button class="btn" (click)="handleDeletePost(post)">삭제</button>
-        <button class="btn" [routerLink]="['/edit', post.id]">수정</button>
+        <button class="btn" (click)="handleDeletePost(post)">
+          {{ "delete" | translate }}
+        </button>
+        <button class="btn" [routerLink]="['/edit', post.id]">
+          {{ "edit" | translate }}
+        </button>
       </div>
       <div class="clr-toggle-wrapper">
         <input
@@ -18,11 +22,15 @@
           value="option1"
           (click)="handleToggleOn()"
         />
-        <label for="toggle1">{{ post.isDraft ? "초안" : "최종안" }}</label>
+        <label for="toggle1">{{
+          (post.isDraft ? "draft" : "final") | translate
+        }}</label>
       </div>
     </div>
-    <p>생성일 {{ post.createDate | date: "short" }}</p>
-    <p>출판일 {{ post.editDate | date: "short" }}</p>
+    <p>
+      {{ "creationDate" | translate }} {{ post.createDate | date: "short" }}
+    </p>
+    <p>{{ "publishDate" | translate }} {{ post.editDate | date: "short" }}</p>
     <p>{{ post.text }}</p>
   </div>
 </div>

@@ -1,13 +1,17 @@
+<div class="btn-group btn-primary">
+  <button class="btn" (click)="handleLangChange('en')">English</button>
+  <button class="btn" (click)="handleLangChange('ko')">한국어</button>
+</div>
 <div class="top-row">
   <h2>velog</h2>
   <a routerLink="/create">
-    <button class="main-btn">새 글 작성</button>
+    <button class="main-btn">{{ "writeNewText" | translate }}</button>
   </a>
 </div>
 <div class="grid-container">
   <div *ngFor="let post of blogPosts" class="grid-item">
     <a [routerLink]="['/blog', post.id]">
-      <p>{{ post.isDraft ? "초안" : "최종안" }}</p>
+      <p>{{ (post.isDraft ? "draft" : "final") | translate }}</p>
       <div *ngIf="post.isDraft">
         <span class="badge badge-success">
           <span class="clr-sr-only"></span>
@@ -15,8 +19,10 @@
       </div>
       <h3>{{ post.title | slice: 0 : 10 }}</h3>
       <p>{{ post.text | slice: 0 : 30 }} ...</p>
-      <p>생성일 {{ post.createDate | date: "short" }}</p>
-      <p>출판일 {{ post.editDate | date: "short" }}</p>
+      <p>
+        {{ "creationDate" | translate }} {{ post.createDate | date: "short" }}
+      </p>
+      <p>{{ "publishDate" | translate }} {{ post.editDate | date: "short" }}</p>
     </a>
   </div>
 </div>

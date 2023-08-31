@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { BlogService } from '../service/blog.service';
+import { BlogService } from '../../service/blog.service';
 
 @Component({
   selector: 'app-blog-create',
@@ -31,8 +31,14 @@ export class BlogCreateComponent {
     );
     this._blogForm.reset();
     this.router.navigate(['/']).then(
-      (nav) => {},
-      (err) => {},
+      (nav) => {
+        if (!nav) {
+          throw Error('Navigation failed');
+        }
+      },
+      (err) => {
+        throw Error(err);
+      },
     );
   }
 }

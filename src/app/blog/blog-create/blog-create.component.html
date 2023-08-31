@@ -1,20 +1,21 @@
 <form
   class="blog-form"
+  clrForm
   [formGroup]="blogForm"
-  (ngSubmit)="handleUpdateSubmit()"
+  (ngSubmit)="handleAddSubmit()"
 >
   <input
     class="blog-form-title"
     formControlName="title"
-    placeholder="제목을 입력하세요"
+    placeholder="{{ 'enterTitle' | translate }}"
     required
   />
   <textarea
     class="blog-form-text"
     formControlName="text"
-    placeholder="당신의 이야기를 적어보세요 ..."
+    placeholder="{{ 'enterText' | translate }}"
     required
   >
   </textarea>
-  <button class="submit-btn" type="submit">수정하기</button>
+  <button class="submit-btn" type="submit">{{ "publish" | translate }}</button>
 </form>
