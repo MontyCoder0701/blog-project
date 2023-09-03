@@ -4,9 +4,11 @@
 </div>
 <div class="top-row">
   <h2>velog</h2>
-  <a routerLink="/create">
-    <button class="main-btn">{{ "writeNewText" | translate }}</button>
-  </a>
+  <ng-container *ngIf="authenticated">
+    <a routerLink="/create">
+      <button class="main-btn">{{ "writeNewText" | translate }}</button>
+    </a>
+  </ng-container>
 </div>
 <div class="grid-container">
   <div *ngFor="let post of blogPosts" class="grid-item">
