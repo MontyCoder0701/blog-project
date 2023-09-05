@@ -16,13 +16,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { BlogModule } from './blog/blog.module';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { LoginComponent } from './login/login.component';
+import { SharedModule } from './shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent],
   imports: [
     BlogModule,
     HttpClientModule,
@@ -37,6 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
+    SharedModule,
   ],
   providers: [
     {

@@ -5,12 +5,14 @@ import { HomeComponent } from './home/home.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogEditComponent } from './blog/blog-edit/blog-edit.component';
 import { BlogCreateComponent } from './blog/blog-create/blog-create.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create', component: BlogCreateComponent },
   { path: 'blog/:id', component: BlogDetailComponent },
   { path: 'edit/:id', component: BlogEditComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { BlogService } from '../../service/blog.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-blog-create',
@@ -16,8 +15,8 @@ export class BlogCreateComponent {
   });
 
   constructor(
-    private blogService: BlogService,
     private router: Router,
+    private http: HttpClient,
   ) {}
 
   get blogForm() {
@@ -25,20 +24,20 @@ export class BlogCreateComponent {
   }
 
   handleAddSubmit() {
-    this.blogService.addBlogPost(
-      this._blogForm.value.title,
-      this._blogForm.value.text,
-    );
-    this._blogForm.reset();
-    this.router.navigate(['/']).then(
-      (nav) => {
-        if (!nav) {
-          throw Error('Navigation failed');
-        }
-      },
-      (err) => {
-        throw Error(err);
-      },
-    );
+    this.http
+      .post('http://localhost:5500/blog/create', this._blogForm.getRawValue())
+      .subscribe(() => {
+        this._blogForm.reset();
+        this.router.navigate(['/']).then(
+          (nav) => {
+            if (!nav) {
+              throw Error('Navigation failed');
+            }
+          },
+          (err) => {
+            throw Error(err);
+          },
+        );
+      });
   }
 }

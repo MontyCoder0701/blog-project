@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { BlogService } from '../../service/blog.service';
-import { BlogPost } from '../../interface/blog-post.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-blog-edit',
@@ -11,13 +9,13 @@ import { BlogPost } from '../../interface/blog-post.interface';
   styleUrls: ['./blog-edit.component.css'],
 })
 export class BlogEditComponent implements OnInit {
+  private _data: any;
   private _postId: string = '';
-  private _post?: BlogPost;
 
   constructor(
-    private blogService: BlogService,
     private router: Router,
     private route: ActivatedRoute,
+    private http: HttpClient,
   ) {}
 
   private _blogForm: FormGroup = new FormGroup({
@@ -32,29 +30,37 @@ export class BlogEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this._postId = params['id'];
-      this._post = this.blogService.getBlogPostById(this._postId);
-
-      if (this._post) {
-        this._blogForm.setValue({
-          title: this._post.title,
-          text: this._post.text,
+      this.http
+        .post(`http://localhost:5500/blog/${this._postId}`, '')
+        .subscribe((response) => {
+          this._data = response;
+          if (this._data) {
+            this._blogForm.setValue({
+              title: this._data.title,
+              text: this._data.text,
+            });
+          }
         });
-      }
     });
   }
 
   handleUpdateSubmit() {
-    this.blogService.updateBlogPost(this._postId, this._blogForm.value);
-    this._blogForm.reset();
-    this.router.navigate(['/']).then(
-      (nav) => {
-        if (!nav) {
-          throw Error('Navigation failed');
-        }
-      },
-      (err) => {
-        throw Error(err);
-      },
-    );
+    this.http
+      .post('http://localhost:5500/blog/updateBlog', {
+        id: this._postId,
+        blog: this._blogForm.value,
+      })
+      .subscribe((response) => {
+        this.router.navigate(['/']).then(
+          (nav) => {
+            if (!nav) {
+              throw Error('Navigation failed');
+            }
+          },
+          (err) => {
+            throw Error(err);
+          },
+        );
+      });
   }
 }

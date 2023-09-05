@@ -8,10 +8,18 @@
     <a routerLink="/create">
       <button class="main-btn">{{ "writeNewText" | translate }}</button>
     </a>
+    <a routerLink="/">
+      <button class="main-btn" (click)="handleLogout()">로그아웃</button>
+    </a>
+  </ng-container>
+  <ng-container *ngIf="!authenticated">
+    <a routerLink="/login">
+      <button class="main-btn">로그인</button>
+    </a>
   </ng-container>
 </div>
 <div class="grid-container">
-  <div *ngFor="let post of blogPosts" class="grid-item">
+  <div *ngFor="let post of data" class="grid-item">
     <a [routerLink]="['/blog', post.id]">
       <p>{{ (post.isDraft ? "draft" : "final") | translate }}</p>
       <div *ngIf="post.isDraft">
@@ -22,7 +30,7 @@
       <h3>{{ post.title | slice: 0 : 10 }}</h3>
       <p>{{ post.text | slice: 0 : 30 }} ...</p>
       <p>
-        {{ "creationDate" | translate }} {{ post.createDate | date: "short" }}
+        {{ "creationDate" | translate }} {{ post.date | date: "short" }}
       </p>
       <p>{{ "publishDate" | translate }} {{ post.editDate | date: "short" }}</p>
     </a>
